@@ -24,6 +24,9 @@ qtcreator-*
 # Emacs
 .#*
 
+# Arduino
+*.DS_Store
+
 # Colcon custom files
 COLCON_IGNORE
 AMENT_IGNORE
