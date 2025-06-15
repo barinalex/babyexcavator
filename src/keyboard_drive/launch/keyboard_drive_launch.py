@@ -31,34 +31,84 @@ from launch_ros.actions import Node
 # | Z      | 26    |
 
 def generate_launch_description():
-    # Left motor node with keys: Q (forward), A (release), Z (backward)
     left_motor_node = Node(
         package='keyboard_drive',
         executable='keyboard_drive_node',
         name='keyboard_drive_left_motor',
         parameters=[{
-            'forward': 17,      # Q
-            'release': 1,      # A
-            'backward': 26,     # Z
+            'forward': 23,      # W
+            'release': 19,      # S
+            'backward': 24,     # X
             'topic_name': '/left_track/cmd_vel',
         }]
     )
 
-    # Right motor node with keys: W (forward), S (release), X (backward)
     right_motor_node = Node(
         package='keyboard_drive',
         executable='keyboard_drive_node',
         name='keyboard_drive_right_motor',
         parameters=[{
-            'forward': 23,      # W
-            'release': 19,      # S
-            'backward': 24,     # X
+            'forward': 5,      # E 
+            'release': 4,      # D
+            'backward': 3,     # C
             'topic_name': '/right_track/cmd_vel',
+        }]
+    )
+
+    platform = Node(
+        package='keyboard_drive',
+        executable='keyboard_drive_node',
+        name='keyboard_drive_platform',
+        parameters=[{
+            'forward': 18,     # R
+            'release': 6,      # F
+            'backward': 22,    # V
+            'topic_name': '/platform/cmd_vel',
+        }]
+    )
+
+    shoulder = Node(
+        package='keyboard_drive',
+        executable='keyboard_drive_node',
+        name='keyboard_drive_shoulder',
+        parameters=[{
+            'forward': 20,     # T
+            'release': 7,      # G
+            'backward': 2,     # B
+            'topic_name': '/shoulder/cmd_vel',
+        }]
+    )
+
+    arm = Node(
+        package='keyboard_drive',
+        executable='keyboard_drive_node',
+        name='keyboard_drive_arm',
+        parameters=[{
+            'forward': 25,     # Y
+            'release': 8,      # H
+            'backward': 14,    # N
+            'topic_name': '/shoulder/cmd_vel',
+        }]
+    )
+
+    bucket = Node(
+        package='keyboard_drive',
+        executable='keyboard_drive_node',
+        name='keyboard_drive_bucket',
+        parameters=[{
+            'forward': 21,     # U
+            'release': 10,     # J
+            'backward': 13,    # M
+            'topic_name': '/bucket/cmd_vel',
         }]
     )
 
     return LaunchDescription([
         left_motor_node,
         right_motor_node,
+        platform,
+        shoulder,
+        arm,
+        bucket
     ])
 
