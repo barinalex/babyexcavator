@@ -3,7 +3,7 @@ from rclpy.node import Node
 import serial
 import time
 
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import String
 
 class CmdVelToSerial(Node):
     def __init__(self):
@@ -13,7 +13,7 @@ class CmdVelToSerial(Node):
         self.serial_port = serial.Serial('/dev/ttyUSB0', 9600, timeout=1)
 
         self.subscription = self.create_subscription(
-            Twist,
+            String,
             '/arduino/motor_control',
             self.motor_command_callback,
             10
