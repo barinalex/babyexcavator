@@ -44,16 +44,16 @@ public:
     this->declare_parameter<int>("forward", 23);   // W
     this->declare_parameter<int>("release", 19);   // S
     this->declare_parameter<int>("backward", 24);  // X
+    this->declare_parameter<int>("speed", 60);
     this->declare_parameter<std::string>("motor_name", "default_motor");
 
     // Get parameters
     forward_key_ = this->get_parameter("forward").as_int();
     backward_key_ = this->get_parameter("backward").as_int();
     release_key_ = this->get_parameter("release").as_int();
+    speed_ = this->get_parameter("speed").as_int() / 100.;
     motor_name_ = this->get_parameter("motor_name").as_string();
     topic_name_ =  "/" + motor_name_ + "/cmd_vel";
-
-    speed_ = 0.5;
 
     // Setup publisher
     publisher_ = this->create_publisher<geometry_msgs::msg::Twist>(topic_name_, 10);

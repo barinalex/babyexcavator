@@ -39,6 +39,7 @@ def generate_launch_description():
             'forward': 23,      # W
             'release': 19,      # S
             'backward': 24,     # X
+            'speed': 100,
             'motor_name': 'lefttrack',
         }]
     )
@@ -51,6 +52,7 @@ def generate_launch_description():
             'forward': 5,      # E 
             'release': 4,      # D
             'backward': 3,     # C
+            'speed': 100,
             'motor_name': 'righttrack',
         }]
     )
@@ -63,6 +65,7 @@ def generate_launch_description():
             'forward': 18,     # R
             'release': 6,      # F
             'backward': 22,    # V
+            'speed': 100,
             'motor_name': 'platform',
         }]
     )
@@ -75,6 +78,7 @@ def generate_launch_description():
             'forward': 20,     # T
             'release': 7,      # G
             'backward': 2,     # B
+            'speed': 50,
             'motor_name': 'shoulder',
         }]
     )
@@ -87,6 +91,7 @@ def generate_launch_description():
             'forward': 25,     # Y
             'release': 8,      # H
             'backward': 14,    # N
+            'speed': 50,
             'motor_name': 'arm',
         }]
     )
@@ -99,6 +104,7 @@ def generate_launch_description():
             'forward': 21,     # U
             'release': 10,     # J
             'backward': 13,    # M
+            'speed': 50,
             'motor_name': 'bucket',
         }]
     )
