@@ -1,0 +1,23 @@
+<?xml version="3.0"?>
+<package format="3">
+  <name>keyboard_publisher</name>
+  <version>0.1.0</version>
+  <description>Node that republishes keyboard presses for other nodes to read</description>
+  <maintainer email="your.email@example.com">Your Name</maintainer>
+  <license>Apache-2.0</license>
+
+  <!-- Core dependencies -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>keyboard_handler</depend>
+  <depend>std_msgs</depend>
+
+  <!-- For development/IDE support -->
+  <exec_depend>ament_index_cpp</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
+
