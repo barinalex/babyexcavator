@@ -39,7 +39,7 @@ def generate_launch_description():
             'forward': 23,      # W
             'release': 19,      # S
             'backward': 24,     # X
-            'motor_name': 'left_track',
+            'motor_name': 'lefttrack',
         }]
     )
 
@@ -51,7 +51,7 @@ def generate_launch_description():
             'forward': 5,      # E 
             'release': 4,      # D
             'backward': 3,     # C
-            'motor_name': 'right_track',
+            'motor_name': 'righttrack',
         }]
     )
 
