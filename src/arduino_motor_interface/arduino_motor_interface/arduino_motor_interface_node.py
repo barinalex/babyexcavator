@@ -3,7 +3,7 @@ from rclpy.node import Node
 import serial
 import time
 
-from geometry_msgs.msg import String
+from std_msgs.msg import String
 
 class CmdVelToSerial(Node):
     def __init__(self):
