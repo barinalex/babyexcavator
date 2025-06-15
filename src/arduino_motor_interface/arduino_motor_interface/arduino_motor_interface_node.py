@@ -14,43 +14,33 @@ class CmdVelToSerial(Node):
 
         self.subscription = self.create_subscription(
             Twist,
-            '/cmd_vel',
-            self.cmd_vel_callback,
+            '/arduino/motor_control',
+            self.motor_command_callback,
             10
         )
 
-        self.get_logger().info("Listening to /cmd_vel and sending motor commands to Arduino")
+        self.get_logger().info("Listening to /arduino/motor_control and sending motor commands to Arduino")
 
-    def cmd_vel_callback(self, msg):
-        linear = msg.linear.x
-        angular = msg.angular.z
+    def motor_command_callback(self, msg):
+        cmd = msg.data.strip()
 
-        # Simple tank drive conversion
-        left_speed = linear - angular
-        right_speed = linear + angular
-
-        # Clamp and scale
-        def scale(val):
-            return int(max(min(val, 1.0), -1.0) * 100)
-
-        lspd = scale(left_speed)
-        rspd = scale(right_speed)
-
-        # Build and send motor commands
-        commands = [
-            f"lefttrack:{'F' if lspd > 0 else 'B' if lspd < 0 else 'R'}:{abs(lspd)}",
-            f"righttrack:{'F' if rspd > 0 else 'B' if rspd < 0 else 'R'}:{abs(rspd)}"
-        ]
-
-        for cmd in commands:
+        try:
             self.serial_port.write((cmd + '\n').encode())
-            self.get_logger().info(f"Sent: {cmd}")
+            self.get_logger().info(f"Sent to Arduino: {cmd}")
 
-            time.sleep(0.1)
+            time.sleep(0.05)
 
-            line = self.serial_port.readline().decode().strip()
-            if line:
-                self.get_logger().info(f"[Arduino] {line}")
+            response = self.serial_port.readline().decode().strip()
+            if response:
+                self.get_logger().info(f"[Arduino] {response}")
+
+        except serial.SerialException as e:
+            self.get_logger().error(f"Serial write/read failed: {e}")
+
+    def close(self):
+        if self.serial_port.is_open:
+            self.serial_port.close()
+            self.get_logger().info("Closed serial port")
 
 
 def main(args=None):
@@ -61,7 +51,7 @@ def main(args=None):
     except KeyboardInterrupt:
         pass
     finally:
-        node.serial_port.close()
+        node.close()
         node.destroy_node()
         rclpy.shutdown()
 
